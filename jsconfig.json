@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "es6",
+        "esModuleInterop": true,
+        "types": [
+            "cypress"
+        ]
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}

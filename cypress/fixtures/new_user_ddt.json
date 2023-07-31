@@ -1,0 +1,9 @@
+[
+    {
+        "password": "heslo45",
+        "role": "Manager",
+        "firstName": "Ivana",
+        "lastName": "Marikova",
+        "start_date": "today"
+    }
+]
