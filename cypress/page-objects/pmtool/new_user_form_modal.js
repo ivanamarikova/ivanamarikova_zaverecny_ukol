@@ -20,6 +20,11 @@ export class NewUserFormModal {
         return this;
     }
 
+    addUserButtonIsVisible() {
+        cy.get(this.addUserButton).should('be.visible');
+        return this;
+    }
+
     waitForProgressBarVanish() {
         cy.get(this.progressBar).should("not.exist");
         return this;
@@ -30,33 +35,68 @@ export class NewUserFormModal {
         return this;
     }
 
-    selectAccesGroup(role) {
-        cy.get(this.accesGroupSelect).select(role);
+    UserStatusHaveText(expectedStatus) {
+        cy.get(this.userStatusSelect).should('contain', expectedStatus);
         return this;
     }
 
-    typeUsername(username) {
-        cy.get(this.usernameTest).type(username);
+    selectAccesGroup() {
+        cy.get(this.accesGroupSelect).select("Manager");
+        return this;
+    }
+
+    AccessGroupHaveText(expectedStatus) {
+        cy.get(this.accesGroupSelect).should('contain', expectedStatus);
+        return this;
+    }
+
+    typeUsername() {
+        cy.get(this.usernameTest).type("Jana1");
+        return this;
+    }
+
+    UsernameIsVisible() {
+        cy.get(this.usernameTest).should('be.visible');
         return this;
     }
 
     typePassword() {
-        cy.get(this.userPasswordTest).type("heslo45");
+        cy.get(this.userPasswordTest).type("heslotest");
+        return this;
+    }
+
+    passwordTestIsVisible() {
+        cy.get(this.userPasswordTest).should('be.visible');
         return this;
     }
 
     typeFirstName(firstname) {
-        cy.get(this.firstNameTest).type("Ivana");
+        cy.get(this.firstNameTest).type("Jana");
         return this;
     }
 
-    typeLastName(lastname) {
-        cy.get(this.lastNameTest).type("Marikova");
+    firstNameTestIsVisible() {
+        cy.get(this.firstNameTest).should('be.visible');
         return this;
     }
 
-    typeUserEmail(email) {
-        cy.get(this.userEmailAdress).type(email);
+    typeLastName() {
+        cy.get(this.lastNameTest).type("Nova");
+        return this;
+    }
+
+    lastNameTestIsVisible() {
+        cy.get(this.lastNameTest).should('be.visible');
+        return this;
+    }
+
+    typeUserEmail() {
+        cy.get(this.userEmailAdress).type("jana.nova@example.org");
+        return this;
+    }
+
+    userEmailIsVisible() {
+        cy.get(this.userEmailAdress).should('be.visible');
         return this;
     }
 
@@ -65,11 +105,20 @@ export class NewUserFormModal {
         return this;
     }
 
+    selectLanguageHaveText(expectedStatus) {
+        cy.get(this.languageSelect).should('contain', expectedStatus);
+        return this;
+    }
+
     clickSaveButtonUser() {
         cy.get(this.saveButtonUser).click();
         return new UsersPage();
     }
+    verifyFormValidity() {
+        cy.get(this.usernameTest).should('have.value', '').should('not.be.empty');
+        cy.get(this.userPasswordTest).should('have.value', '').should('not.be.empty');
+        cy.get(this.firstNameTest).should('have.value', '').should('not.be.empty');
+        cy.get(this.lastNameTest).should('have.value', '').should('not.be.empty');
+        cy.get(this.userEmailAdress).should('have.value', '').should('not.be.empty');
+    }
 }
-
-
-

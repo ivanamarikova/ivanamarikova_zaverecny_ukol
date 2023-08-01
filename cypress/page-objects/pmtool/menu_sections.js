@@ -5,13 +5,18 @@ export class MenuSection extends BasePage {
         super(path);
         this.dashboardAnchor = "#dashboard>a";
         this.projectsAnchor = "#Projects>a";
-        this.usersAnchor = "#Users>a>i.fa-user";
+        this.usersAnchor = "#Users>a>i.fa-user"
     }
 
     clickDashboard() {
         const { HomePage } = require("./home_page");
         cy.get(this.dashboardAnchor).click();
         return new HomePage();
+    }
+
+    usersAnchorIsVisible() {
+        cy.get(this.usersAnchor).should('be.visible');
+        return this;
     }
 
     clickProjects() {
