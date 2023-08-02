@@ -1,6 +1,7 @@
 import { HeaderSection } from "./header_sections";
 import { NewProjectFormModal } from "./new_project_form_modal";
 import { ProjectsTasksPage } from "./projects_tasks_page";
+import 'cypress-xpath';
 
 export class ProjectsPage extends HeaderSection {
     constructor() {
