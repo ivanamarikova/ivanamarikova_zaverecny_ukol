@@ -1,0 +1,44 @@
+[
+    {
+        "Name_prefix": "idea_new_urgent",
+        "Type": "Idea",
+        "Status": "New",
+        "Priority": "Urgent"
+    },
+    {
+        "Name_prefix": "task_open_high",
+        "Type": "Task",
+        "Status": "Open",
+        "Priority": "High"
+    },
+    {
+        "Name_prefix": "change_waiting_medium",
+        "Type": "Change",
+        "Status": "Waiting",
+        "Priority": "Medium"
+    },
+    {
+        "Name_prefix": "bug_done_urgent",
+        "Type": "Bug",
+        "Status": "Done",
+        "Priority": "Urgent"
+    },
+    {
+        "Name_prefix": "bug_closed_medium",
+        "Type": "Bug",
+        "Status": "Closed",
+        "Priority": "Medium"
+    },
+    {
+        "Name_prefix": "bug_paid_high",
+        "Type": "Bug",
+        "Status": "Paid",
+        "Priority": "High"
+    },
+    {
+        "Name_prefix": "bug_canceled_urgen",
+        "Type": "Bug",
+        "Status": "Canceled",
+        "Priority": "Urgent"
+    }
+]
