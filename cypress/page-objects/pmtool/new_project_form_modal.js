@@ -17,7 +17,7 @@ export class NewProjectFormModal {
     }
 
     typeProjectName(projectName) {
-        cy.get(this.projectNameInput).type(projectName);
+        cy.get(this.projectNameInput).type("Projekt 1");
         return this;
     }
 
@@ -45,8 +45,8 @@ export class NewProjectFormModal {
         cy.get(this.descriptionIframe).then(($iframe) => {
             const body = $iframe.contents().find("body");
             cy.wrap(body).as("iframe");
+            cy.get("@iframe").type("1234")
         });
-        cy.get("@iframe").type(description);
         return this;
     }
 }

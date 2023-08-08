@@ -10,11 +10,14 @@ import newUserDDT from "../fixtures/new_user_ddt.json";
 import { ProjectsPage } from "../page-objects/pmtool/projects_page";
 
 describe("Create new user tests - role manager", () => {
-    before(() => {
+    beforeEach(() => {
+        const adminUserName = Cypress.env("adminUserName");
+        const adminPassword = Cypress.env("adminPassword");
+
         new LoginPage()
             .openPmtool()
-            .typeAdminUserName("fifka_petr")
-            .typeAdminPassword("Tredgate2023")
+            .typeAdminUserName(adminUserName)
+            .typeAdminPassword(adminPassword)
             .clickLogin();
 
         new MenuSection().clickUsers();
@@ -33,8 +36,8 @@ describe("Create new user tests - role manager", () => {
                 .selectAccesGroup(user.role)
                 .typeUsername(username)
                 .typePassword(user.password)
-                .typeFirstName("Ivana")
-                .typeLastName("Marikova")
+                .typeFirstName()
+                .typeLastName()
                 .typeUserEmail(exampleEmail)
                 .selectLanguage("English")
                 .clickSaveButtonUser();
@@ -53,18 +56,18 @@ describe("Create new user tests - role manager", () => {
 
             new NewProjectFormModal()
                 .waitForProgressBarVanish()
-                .selectPriority("Urgent")
-                .selectStatus("New")
-                .typeProjectName("Projekt 1")
+                .selectPriority()
+                .selectStatus()
+                .typeProjectName()
                 .fillStartDate(start_date)
-                .typeDescription("text 234")
+                .typeDescription()
                 .clickSaveButton();
 
             new ProjectsTasksPage()
                 .clickProjectInfo()
-                .descriptionHasText("text 234")
-                .priorityHaveValue("Urgent")
-                .statusHaveValue("New");
+                .descriptionHasText()
+                .priorityHaveValue()
+                .statusHaveValue();
         });
 
         function getStartDate(start_date) {

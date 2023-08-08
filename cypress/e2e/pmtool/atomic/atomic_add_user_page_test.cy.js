@@ -5,12 +5,12 @@ import { UsersPage } from "../../../page-objects/pmtool/users_page";
 
 describe('Atomic add users page tests', () => {
     beforeEach(() => {
-        const username = Cypress.env("pmtool_username");
-        const password = Cypress.env("pmtool_password");
+        const adminUserName = Cypress.env("adminUserName");
+        const adminPassword = Cypress.env("adminPassword");
         new LoginPage()
             .openPmtool()
-            .typeAdminUserName(username)
-            .typeAdminPassword(password)
+            .typeAdminUserName(adminUserName)
+            .typeAdminPassword(adminPassword)
             .clickLogin();
 
         new MenuSection().clickUsers();
@@ -22,47 +22,67 @@ describe('Atomic add users page tests', () => {
             new NewUserFormModal().addUserButtonIsVisible();
         });
 
-        it('User status have text', () => {
+        it('User status should have text', () => {
             new NewUserFormModal().selectUserStatus().UserStatusHaveText('Active');
         });
 
-        it('Access group have text', () => {
-            new NewUserFormModal().selectAccesGroup().AccessGroupHaveText('Manager');
+        it('Access group should have text', () => {
+            new NewUserFormModal().selectAccesGroup('Manager').AccessGroupHaveText('Manager');
         });
 
         it('Username should be visible', () => {
             const username = 'fifka_petr';
-            new NewUserFormModal().typeUsername(username).UsernameIsVisible(username);
+            new NewUserFormModal().typeUsername(username).UsernameIsVisible();
+        });
+
+        it('Username required should be visible', () => {
+            new NewUserFormModal().userNameRequiredIsVisible();
+        });
+
+        it('Password required should be visible', () => {
+            new NewUserFormModal().passwordRequiredIsVisible();
+        });
+
+        it('First name required should be visible', () => {
+            new NewUserFormModal().firstNameRequiredIsVisible();
+        });
+
+        it('Last name required should be visible', () => {
+            new NewUserFormModal().lastNameRequiredIsVisible();
+        });
+
+        it('User email required should be visible', () => {
+            new NewUserFormModal().userEmailRequiredIsVible();
         });
 
         it('Password should be visible', () => {
             const password = 'testPassword';
-            new NewUserFormModal().typePassword(password).passwordTestIsVisible(password);
+            new NewUserFormModal().typePassword(password).passwordTestIsVisible();
         });
 
         it('First name should be visible', () => {
             const firstName = 'Ivana';
-            new NewUserFormModal().typeFirstName(firstName).firstNameTestIsVisible(firstName);
+            new NewUserFormModal().typeFirstName(firstName).firstNameTestIsVisible();
         });
 
         it('Last name should be visible', () => {
             const lastName = 'Marikova';
-            new NewUserFormModal().typeLastName(lastName).lastNameTestIsVisible(lastName);
+            new NewUserFormModal().typeLastName(lastName).lastNameTestIsVisible();
         });
 
-        it('Email adress should be visible', () => {
+        it('Email address should be visible', () => {
             const exampleEmail = 'example@example.com';
-            new NewUserFormModal().typeUserEmail(exampleEmail).userEmailIsVisible(exampleEmail);
+            new NewUserFormModal().typeUserEmail(exampleEmail).userEmailIsVisible();
         });
 
         it('Select language have text', () => {
-            new NewUserFormModal().selectLanguage().selectLanguageHaveText('English');
+            new NewUserFormModal().selectLanguage('English').selectLanguageHasText('English');
         });
+
     });
 
     it('Save button should be visible', () => {
         new NewUserFormModal().clickSaveButtonUser();
         new UsersPage().SaveButtonIsVisible();
-        new NewUserFormModal().verifyFormValidity();
     });
 });

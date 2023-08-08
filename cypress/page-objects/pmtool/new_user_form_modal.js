@@ -7,12 +7,42 @@ export class NewUserFormModal {
         this.userStatusSelect = 'div[data-testid="User Status"] select';
         this.accesGroupSelect = 'div[data-testid="Access Group"] select';
         this.usernameTest = "#fields_12";
+        this.usernameRequired = "label[for='fields_12'] span[class='required-label']";
+        this.passwordRequired = "label[for='password'] span[class='required-label']";
         this.userPasswordTest = "#password";
         this.firstNameTest = "#fields_7";
+        this.firstNameRequired = "label[for='fields_7'] span[class='required-label']";
         this.lastNameTest = "#fields_8";
+        this.lastNameRequired = "label[for='fields_8'] span[class='required-label']";
         this.userEmailAdress = "#fields_9";
+        this.userEmailRequired = "label[for='fields_9'] span[class='required-label']";
         this.languageSelect = 'div[data-testid="Language"] select';
         this.saveButtonUser = 'button[type="submit"]';
+    }
+
+    userNameRequiredIsVisible() {
+        cy.get(this.usernameRequired).should('be.visible');
+        return this;
+    }
+
+    passwordRequiredIsVisible() {
+        cy.get(this.passwordRequired).should('be.visible');
+        return this;
+    }
+
+    firstNameRequiredIsVisible() {
+        cy.get(this.firstNameRequired).should('be.visible');
+        return this;
+    }
+
+    lastNameRequiredIsVisible() {
+        cy.get(this.lastNameRequired).should('be.visible');
+        return this;
+    }
+
+    userEmailRequiredIsVible() {
+        cy.get(this.userEmailRequired).should('be.visible');
+        return this;
     }
 
     clickAddUserButton() {
@@ -40,18 +70,18 @@ export class NewUserFormModal {
         return this;
     }
 
-    selectAccesGroup() {
-        cy.get(this.accesGroupSelect).select("Manager");
+    selectAccesGroup(role) {
+        cy.get(this.accesGroupSelect).select(role);
         return this;
     }
 
-    AccessGroupHaveText(expectedStatus) {
-        cy.get(this.accesGroupSelect).should('contain', expectedStatus);
+    AccessGroupHaveText(expectedRole) {
+        cy.get(this.accesGroupSelect).should('contain', expectedRole);
         return this;
     }
 
-    typeUsername() {
-        cy.get(this.usernameTest).type("Jana1");
+    typeUsername(username) {
+        cy.get(this.usernameTest).type(username);
         return this;
     }
 
@@ -60,8 +90,8 @@ export class NewUserFormModal {
         return this;
     }
 
-    typePassword() {
-        cy.get(this.userPasswordTest).type("heslotest");
+    typePassword(password) {
+        cy.get(this.userPasswordTest).type(password);
         return this;
     }
 
@@ -71,7 +101,7 @@ export class NewUserFormModal {
     }
 
     typeFirstName(firstname) {
-        cy.get(this.firstNameTest).type("Jana");
+        cy.get(this.firstNameTest).type("Ivana");
         return this;
     }
 
@@ -80,8 +110,8 @@ export class NewUserFormModal {
         return this;
     }
 
-    typeLastName() {
-        cy.get(this.lastNameTest).type("Nova");
+    typeLastName(lastname) {
+        cy.get(this.lastNameTest).type("Marikova");
         return this;
     }
 
@@ -90,8 +120,8 @@ export class NewUserFormModal {
         return this;
     }
 
-    typeUserEmail() {
-        cy.get(this.userEmailAdress).type("jana.nova@example.org");
+    typeUserEmail(email) {
+        cy.get(this.userEmailAdress).type(email);
         return this;
     }
 
@@ -100,13 +130,13 @@ export class NewUserFormModal {
         return this;
     }
 
-    selectLanguage() {
+    selectLanguage(language) {
         cy.get(this.languageSelect).select("English");
         return this;
     }
 
-    selectLanguageHaveText(expectedStatus) {
-        cy.get(this.languageSelect).should('contain', expectedStatus);
+    selectLanguageHasText(expectedLanguage) {
+        cy.get(this.languageSelect).should('contain', expectedLanguage);
         return this;
     }
 
@@ -114,11 +144,5 @@ export class NewUserFormModal {
         cy.get(this.saveButtonUser).click();
         return new UsersPage();
     }
-    verifyFormValidity() {
-        cy.get(this.usernameTest).should('have.value', '').should('not.be.empty');
-        cy.get(this.userPasswordTest).should('have.value', '').should('not.be.empty');
-        cy.get(this.firstNameTest).should('have.value', '').should('not.be.empty');
-        cy.get(this.lastNameTest).should('have.value', '').should('not.be.empty');
-        cy.get(this.userEmailAdress).should('have.value', '').should('not.be.empty');
-    }
 }
+

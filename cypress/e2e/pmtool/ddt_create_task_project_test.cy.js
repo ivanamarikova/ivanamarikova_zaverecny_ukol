@@ -11,20 +11,20 @@ describe("Data Driven Tests create project tasks", () => {
     let newTaskWindowPage;
 
     beforeEach(() => {
+        const adminUserName = Cypress.env("adminUserName");
+        const adminPassword = Cypress.env("adminPassword");
+
         new LoginPage()
             .openPmtool()
-            .typeAdminUserName()
-            .typeAdminPassword()
+            .typeAdminUserName(adminUserName)
+            .typeAdminPassword(adminPassword)
             .clickLogin();
 
-        new MenuSection()
-            .clickProjects();
+        new MenuSection().clickProjects();
 
-        new ProjectsPage()
-            .openFirstProjectDetail();
+        new ProjectsPage().openFirstProjectDetail();
 
-        new ProjectsTasksPage()
-            .clickAddTask();
+        new ProjectsTasksPage().clickAddTask();
 
         newTaskWindowPage = new NewTaskWindowPage();
     });
@@ -39,9 +39,15 @@ describe("Data Driven Tests create project tasks", () => {
                 .typeTaskName(task_name)
                 .selectTaskType(task.Type)
                 .selectTaskStatus(task.Status)
-                .selectTaskPriority(task.Priority)
+                .selectTaskPriority(task.Priority);
 
             newTaskWindowPage.waitForSaveCompletion();
+            new ProjectsTasksPage()
+                .clickProjectInfo()
+                .descriptionHasText()
+                .priorityHaveValue()
+                .statusHaveValue();
         });
     });
 });
+

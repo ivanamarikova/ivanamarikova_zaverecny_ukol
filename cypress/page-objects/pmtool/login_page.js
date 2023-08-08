@@ -5,19 +5,16 @@ export class LoginPage {
         this.pmtoolUrl = "http://tredgate.com/pmtool/";
         this.usernameInput = "#username";
         this.passwordInput = "#password";
-        this.typeNewUsername = "#username";
-        this.typeNewPassword = "#password";
         this.loginButton = ".btn";
         this.pageHeader = "h3.form-title";
         this.alertDiv = ".alert-danger";
         this.logoImg = "img";
-
     }
 
     passwordIsVisible() {
         cy.get(this.passwordInput).should("be.visible");
         return this;
-    };
+    }
 
     passwordHasPlaceholder(placeholder) {
         cy.get(this.passwordInput).should("have.attr", "placeholder", placeholder);
@@ -39,13 +36,6 @@ export class LoginPage {
         return this;
     }
 
-
-    usernameHasValue(username) {
-        cy.get(this.usernameInput).type(username).should("have.value", username);
-        return this;
-    }
-
-
     openPmtool() {
         cy.visit(this.pmtoolUrl);
         return this;
@@ -60,13 +50,16 @@ export class LoginPage {
         cy.get(this.alertDiv).should("not.exist");
         return this;
     }
+
     typeAdminUserName() {
-        cy.get(this.usernameInput).type("fifka_petr");
+        const adminUserName = Cypress.env("adminUserName");
+        cy.get(this.usernameInput).type(adminUserName);
         return this;
     }
 
     typeAdminPassword() {
-        cy.get(this.passwordInput).type("Tredgate2023");
+        const adminPassword = Cypress.env("adminPassword");
+        cy.get(this.passwordInput).type(adminPassword);
         return this;
     }
 
@@ -74,9 +67,10 @@ export class LoginPage {
         cy.get(this.loginButton).click();
         return new HomePage();
     }
+
     loginWithNewUserCredentials(username, password) {
-        cy.get(this.typeNewUsername).type(username);
-        cy.get(this.typeNewPassword).type(password);
+        cy.get(this.usernameInput).type(username);
+        cy.get(this.passwordInput).type(password);
         this.clickLogin();
         return new HomePage();
     }

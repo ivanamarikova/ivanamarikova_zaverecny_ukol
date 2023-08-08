@@ -3,6 +3,10 @@ import { HeaderSection } from "./header_sections";
 export class UsersPage extends HeaderSection {
     constructor() {
         super("module=items/items&path=1");
+        this.firstRow = "tr.listing-table-tr[test-id$='project_id_1']";
+        this.fieldTypeActionButtons = "td.fieldtype_action.field-1-td.nowrap";
+        this.searchButton = "button[test_id='search_button']";
+        this.footerInner = ".footer-inner"
         this.pageTitle = ".page-title";
         this.actionHeader = "th[test_id='Action']";
         this.id = "th[test_id='ID']";
@@ -19,6 +23,21 @@ export class UsersPage extends HeaderSection {
         this.UserStatus = "th[test_id='User Status']";
         this.copyrigth = ".footer-inner";
         this.saveButtonUser = 'button[type="submit"]';
+    }
+
+    fieldTypeActionButtonsIsVisible() {
+        cy.get(this.fieldTypeActionButtons).should('be.visible');
+        return this;
+    }
+
+    FirstRowIsVisible() {
+        cy.get(this.firstRow).should('be.visible');
+        return this;
+    }
+
+    footerInnerIsVisible() {
+        cy.get(this.footerInner).should('be.visible');
+        return this;
     }
 
     PageTitleHasText() {
@@ -108,6 +127,11 @@ export class UsersPage extends HeaderSection {
 
     searchBarIsVisible() {
         cy.get(this.searchBar).should('be.visible');
+        return this;
+    }
+
+    searchButtonIsVisible() {
+        cy.get(this.searchButton).should('be.visible');
         return this;
     }
 

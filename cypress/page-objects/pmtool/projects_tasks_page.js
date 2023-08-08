@@ -21,9 +21,13 @@ export class ProjectsTasksPage extends HeaderSection {
         return new ProjectsTasksPage();
     }
 
+    descriptionIsVisible() {
+        cy.get(this.descriptionForm).should('be.visible');
+        return this;
+    }
 
     descriptionHasText(text234) {
-        cy.get(this.descriptionForm).should("contain.text", "text 234");
+        cy.get(this.descriptionForm).should("contain.text", "1234");
         return this;
     }
 
